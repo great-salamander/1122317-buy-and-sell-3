@@ -9,18 +9,18 @@ const {
 } = require(`../../constants`);
 
 const DEFAULT_PORT = 3000;
-const FILENAME = `./src/service/mocks.json`;
+const FILE_PATH = `./src/service/mocks.json`;
 
 const app = express();
 app.use(express.json());
 
 app.get(`/offers`, async (req, res) => {
   try {
-    const fileContent = await fs.readFile(FILENAME);
+    const fileContent = await fs.readFile(FILE_PATH);
     const mocks = JSON.parse(fileContent);
     res.json(mocks);
   } catch (err) {
-    res.status(HttpCode.INTERNAL_SERVER_ERROR).send(err);
+    res.send(`[]`);
   }
 });
 
