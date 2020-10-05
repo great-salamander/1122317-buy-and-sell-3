@@ -3,9 +3,11 @@
 const chalk = require(`chalk`);
 const fs = require(`fs`).promises;
 const express = require(`express`);
+const routes = require(`../api`);
 
 const {
-  HttpCode
+  HttpCode,
+  API_PREFIX
 } = require(`../../constants`);
 
 const DEFAULT_PORT = 3000;
@@ -13,6 +15,7 @@ const FILE_PATH = `./src/service/mocks.json`;
 
 const app = express();
 app.use(express.json());
+app.use(API_PREFIX, routes);
 
 app.get(`/offers`, async (req, res) => {
   try {
